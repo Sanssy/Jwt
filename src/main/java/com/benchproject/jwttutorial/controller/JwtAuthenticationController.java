@@ -3,6 +3,7 @@ package com.benchproject.jwttutorial.controller;
 import com.benchproject.jwttutorial.config.JwtTokenUtil;
 import com.benchproject.jwttutorial.model.JwtRequest;
 import com.benchproject.jwttutorial.model.JwtResponse;
+import com.benchproject.jwttutorial.model.UserDTO;
 import com.benchproject.jwttutorial.service.JwtUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -42,6 +43,11 @@ public class JwtAuthenticationController {
 
         return ResponseEntity.ok(new JwtResponse(token));
 
+    }
+
+    @PostMapping(value = "/register")
+    public ResponseEntity<?> saveUser(@RequestBody UserDTO user) throws Exception {
+        return ResponseEntity.ok(userDetailsService.save(user));
     }
 
     private void authenticate(String username, String password) throws Exception {
